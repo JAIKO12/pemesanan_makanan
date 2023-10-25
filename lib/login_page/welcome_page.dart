@@ -9,10 +9,15 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
+  final _formKey = GlobalKey<FormState>();
   bool _isHidden = true;
   bool _isHiddenEmail = true;
   bool _isHiddenPassword = true;
   bool _isHiddenConfirmPw = true;
+  final _namaTextController = TextEditingController();
+  final _emailTextController = TextEditingController();
+  final _passwordTextController = TextEditingController();
+  final _confirmPwTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -127,199 +132,273 @@ class _WelcomePageState extends State<WelcomePage> {
         builder: (context) {
           return StatefulBuilder(
               builder: (BuildContext context, StateSetter setState) {
-            return Wrap(
-              children: [
-                // bagian modal
-                Container(
-                  color: Colors.transparent,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: modal,
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(40),
-                            topLeft: Radius.circular(40))),
-                    child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // jarak
-                          SizedBox(
-                            height: 25,
-                          ),
-                          Row(
+            return Form(
+                key: _formKey,
+                child: Wrap(
+                  children: [
+                    // bagian modal
+                    Container(
+                      color: Colors.transparent,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: modal,
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(40),
+                                topLeft: Radius.circular(40))),
+                        child: Container(
+                          margin:
+                              EdgeInsets.symmetric(horizontal: defaultMargin),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              // jarak
+                              SizedBox(
+                                height: 25,
+                              ),
+                              Row(
                                 children: [
-                                  Text(
-                                    'Sikahkan',
-                                    style: blackTextStyle.copyWith(
-                                        fontSize: 20, color: blackColor),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Sikahkan',
+                                        style: blackTextStyle.copyWith(
+                                            fontSize: 20, color: blackColor),
+                                      ),
+                                      Text(
+                                        'Registrasi',
+                                        style: blackTextStyle.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 30,
+                                            color: blackColor),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    'Registrasi',
-                                    style: blackTextStyle.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 30,
-                                        color: blackColor),
+                                  Spacer(),
+                                  Center(
+                                    child: InkWell(
+                                      onTap: () {
+                                        // Ketika icon close ditekan
+                                        Navigator.pop(context);
+                                        _emailTextController.clear();
+                                        _passwordTextController.clear();
+                                        _namaTextController.clear();
+                                        _confirmPwTextController.clear();
+                                      },
+                                      child: Image.asset(
+                                        'assets/images/close.png',
+                                        height: 30,
+                                        width: 30,
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
-                              Spacer(),
-                              Center(
-                                child: InkWell(
-                                  onTap: () {
-                                    // Ketika icon close ditekan
-                                    Navigator.pop(context);
-                                  },
-                                  child: Image.asset(
-                                    'assets/images/close.png',
-                                    height: 30,
-                                    width: 30,
-                                  ),
-                                ),
+                              SizedBox(
+                                height: 25,
                               ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 25,
-                          ),
-                          // field nama
-                          TextField(
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                hintText: 'Masukan Nama',
-                                labelText: 'Nama',
-                                suffixIcon: InkWell(
-                                  onTap: () {},
-                                  child: Icon(_isHidden
-                                      ? Icons.visibility_outlined
-                                      : Icons.visibility_off_outlined),
-                                )),
-                          ),
-                          SizedBox(height: 20),
-                          // field email
-                          TextField(
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                hintText: 'pesenmakan@gmail.com',
-                                labelText: 'Email',
-                                suffixIcon: InkWell(
-                                  onTap: () {
-                                    // ketika ditekan
-                                  },
-                                  child: Icon(Icons.visibility),
-                                )),
-                          ),
-                          SizedBox(height: 20),
-                          // field password
-                          TextField(
-                            obscureText: _isHiddenPassword,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                hintText: 'Password',
-                                labelText: 'Password',
-                                suffixIcon: InkWell(
-                                  onTap:
-                                      // ketika ditekan
-                                      _tootlePasswordView,
-                                  child: Icon(_isHiddenPassword
-                                      ? Icons.lock_clock_outlined
-                                      : Icons.lock_clock_outlined),
-                                )),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          // field confirm
-                          TextField(
-                            obscureText: _isHiddenConfirmPw,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                hintText: 'Confrim Password',
-                                labelText: 'Confirm Password',
-                                suffixIcon: InkWell(
-                                  onTap:
-                                      // ketika ditekan
-                                      _tootleConfirmPwView,
-                                  child: Icon(_isHidden
-                                      ? Icons.lock_clock_outlined
-                                      : Icons.lock_clock_outlined),
-                                )),
-                          ),
-                          SizedBox(
-                            height: 25,
-                          ),
-                          Container(
-                            height: 60,
-                            width: MediaQuery.of(context).size.width -
-                                2 * defaultMargin,
-                            child: ElevatedButton(
-                              onPressed: () {},
-                              child: Text(
-                                'Registrasi',
-                                style: blackTextStyle.copyWith(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black),
+                              // field nama
+                              TextFormField(
+                                controller: _namaTextController,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Nama harus diisi';
+                                  }
+                                  return null;
+                                },
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    hintText: 'Masukan Nama',
+                                    labelText: 'Nama',
+                                    suffixIcon: InkWell(
+                                      onTap: () {},
+                                      child: Icon(_isHidden
+                                          ? Icons.visibility_outlined
+                                          : Icons.visibility_off_outlined),
+                                    )),
                               ),
-                              style: ElevatedButton.styleFrom(
-                                  primary: primaryColor,
-                                  shape: RoundedRectangleBorder(
-                                      side: BorderSide(color: Colors.black54),
-                                      borderRadius: BorderRadius.circular(15))),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 25,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Sudah punya akun?',
-                                style: blackTextStyle.copyWith(
-                                    color: blackColor, fontSize: 18),
+                              SizedBox(height: 20),
+                              // field email
+                              TextFormField(
+                                controller: _emailTextController,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Email harus diisi';
+                                  }
+                                  return null;
+                                },
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    hintText: 'pesenmakan@gmail.com',
+                                    labelText: 'Email',
+                                    suffixIcon: InkWell(
+                                      onTap: () {
+                                        // ketika ditekan
+                                      },
+                                      child: Icon(Icons.visibility),
+                                    )),
                               ),
-                              Center(
-                                child: InkWell(
-                                  onTap: () {
-                                    // Ketika kata login ditekan
-                                    Navigator.pop(context);
-                                    _modalLogin();
+                              SizedBox(height: 20),
+                              // field password
+                              TextFormField(
+                                controller: _passwordTextController,
+                                validator: (value) {
+                                  if (value!.length < 6) {
+                                    return 'Password harus lebih dari 6 kata';
+                                  }
+                                  return null;
+                                },
+                                obscureText: _isHiddenPassword,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    hintText: 'Password',
+                                    labelText: 'Password',
+                                    suffixIcon: InkWell(
+                                      onTap:
+                                          // ketika ditekan
+                                          _tootlePasswordView,
+                                      child: Icon(_isHiddenPassword
+                                          ? Icons.lock_clock_outlined
+                                          : Icons.lock_clock_outlined),
+                                    )),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              // field confirm
+                              TextFormField(
+                                controller: _confirmPwTextController,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Konfirmasi password harus diisi';
+                                  }
+                                  if (value != _passwordTextController.text) {
+                                    return 'Password tidak sesuai';
+                                  }
+                                  return null;
+                                },
+                                obscureText: _isHiddenConfirmPw,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    hintText: 'Confrim Password',
+                                    labelText: 'Confirm Password',
+                                    suffixIcon: InkWell(
+                                      onTap:
+                                          // ketika ditekan
+                                          _tootleConfirmPwView,
+                                      child: Icon(_isHidden
+                                          ? Icons.lock_clock_outlined
+                                          : Icons.lock_clock_outlined),
+                                    )),
+                              ),
+                              SizedBox(
+                                height: 25,
+                              ),
+                              Container(
+                                height: 60,
+                                width: MediaQuery.of(context).size.width -
+                                    2 * defaultMargin,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    if (_formKey.currentState!.validate()) {
+                                      // Lakukan sesuatu jika formulir valid
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text(
+                                              "Pesan Sukses",
+                                              style: blackTextStyle,
+                                            ),
+                                            content: Text(
+                                              "Registrasi berhasil.",
+                                              style: blackTextStyle,
+                                            ),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                  _emailTextController.clear();
+                                                  _passwordTextController
+                                                      .clear();
+                                                  _namaTextController.clear();
+                                                  _confirmPwTextController
+                                                      .clear();
+                                                },
+                                                child: Text("Tutup"),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }
                                   },
                                   child: Text(
-                                    'Login',
+                                    'Registrasi',
                                     style: blackTextStyle.copyWith(
-                                        color:
-                                            Color.fromARGB(255, 237, 124, 49),
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black),
                                   ),
+                                  style: ElevatedButton.styleFrom(
+                                      primary: primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                          side:
+                                              BorderSide(color: Colors.black54),
+                                          borderRadius:
+                                              BorderRadius.circular(15))),
                                 ),
+                              ),
+                              SizedBox(
+                                height: 25,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Sudah punya akun?',
+                                    style: blackTextStyle.copyWith(
+                                        color: blackColor, fontSize: 18),
+                                  ),
+                                  Center(
+                                    child: InkWell(
+                                      onTap: () {
+                                        // Ketika kata login ditekan
+                                        Navigator.pop(context);
+                                        _modalLogin();
+                                      },
+                                      child: Text(
+                                        'Login',
+                                        style: blackTextStyle.copyWith(
+                                            color: Color.fromARGB(
+                                                255, 237, 124, 49),
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 25,
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: 25,
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                )
-              ],
-            );
+                    )
+                  ],
+                ));
           });
         });
   }
@@ -331,170 +410,176 @@ class _WelcomePageState extends State<WelcomePage> {
         builder: (context) {
           return StatefulBuilder(
               builder: (BuildContext context, StateSetter setState) {
-            return Wrap(
-              children: [
-                // bagian modal
-                Container(
-                  color: Colors.transparent,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: modal,
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(40),
-                            topLeft: Radius.circular(40))),
-                    child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // jarak
-                          SizedBox(
-                            height: 25,
-                          ),
-                          Row(
+            return Form(
+                key: _formKey,
+                child: Wrap(
+                  children: [
+                    // bagian modal
+                    Container(
+                      color: Colors.transparent,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: modal,
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(40),
+                                topLeft: Radius.circular(40))),
+                        child: Container(
+                          margin:
+                              EdgeInsets.symmetric(horizontal: defaultMargin),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              // jarak
+                              SizedBox(
+                                height: 25,
+                              ),
+                              Row(
                                 children: [
-                                  Text(
-                                    'Sikahkan',
-                                    style: blackTextStyle.copyWith(
-                                        fontSize: 20, color: blackColor),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Sikahkan',
+                                        style: blackTextStyle.copyWith(
+                                            fontSize: 20, color: blackColor),
+                                      ),
+                                      Text(
+                                        'Login',
+                                        style: blackTextStyle.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 30,
+                                            color: blackColor),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    'Login',
-                                    style: blackTextStyle.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 30,
-                                        color: blackColor),
+                                  Spacer(),
+                                  Center(
+                                    child: InkWell(
+                                      onTap: () {
+                                        // Ketika icon close ditekan
+                                        Navigator.pop(context);
+                                      },
+                                      child: Image.asset(
+                                        'assets/images/close.png',
+                                        height: 30,
+                                        width: 30,
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
-                              Spacer(),
-                              Center(
-                                child: InkWell(
-                                  onTap: () {
-                                    // Ketika icon close ditekan
-                                    Navigator.pop(context);
-                                  },
-                                  child: Image.asset(
-                                    'assets/images/close.png',
-                                    height: 30,
-                                    width: 30,
-                                  ),
-                                ),
+                              SizedBox(
+                                height: 25,
                               ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 25,
-                          ),
-                          // field nama
+                              // field nama
 
-                          SizedBox(height: 20),
-                          // field email
-                          TextField(
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                hintText: 'pesenmakan@gmail.com',
-                                labelText: 'Email',
-                                suffixIcon: InkWell(
-                                  onTap: () {
-                                    // ketika ditekan
-                                  },
-                                  child: Icon(Icons.visibility),
-                                )),
-                          ),
-                          SizedBox(height: 20),
-                          // field password
-                          TextField(
-                            obscureText: _isHiddenPassword,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                hintText: 'Password',
-                                labelText: 'Password',
-                                suffixIcon: InkWell(
-                                  onTap:
-                                      // ketika ditekan
-                                      _tootlePasswordView,
-                                  child: Icon(_isHiddenPassword
-                                      ? Icons.lock_clock_outlined
-                                      : Icons.lock_clock_outlined),
-                                )),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          // field confirm
+                              SizedBox(height: 20),
+                              // field email
+                              TextFormField(
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    hintText: 'pesenmakan@gmail.com',
+                                    labelText: 'Email',
+                                    suffixIcon: InkWell(
+                                      onTap: () {
+                                        // ketika ditekan
+                                      },
+                                      child: Icon(Icons.visibility),
+                                    )),
+                              ),
+                              SizedBox(height: 20),
+                              // field password
+                              TextFormField(
+                                obscureText: _isHiddenPassword,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    hintText: 'Password',
+                                    labelText: 'Password',
+                                    suffixIcon: InkWell(
+                                      onTap:
+                                          // ketika ditekan
+                                          _tootlePasswordView,
+                                      child: Icon(_isHiddenPassword
+                                          ? Icons.lock_clock_outlined
+                                          : Icons.lock_clock_outlined),
+                                    )),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              // field confirm
 
-                          SizedBox(
-                            height: 25,
-                          ),
-                          Container(
-                            height: 60,
-                            width: MediaQuery.of(context).size.width -
-                                2 * defaultMargin,
-                            child: ElevatedButton(
-                              onPressed: () {},
-                              child: Text(
-                                'Login',
-                                style: blackTextStyle.copyWith(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black),
+                              SizedBox(
+                                height: 25,
                               ),
-                              style: ElevatedButton.styleFrom(
-                                  primary: primaryColor,
-                                  shape: RoundedRectangleBorder(
-                                      side: BorderSide(color: Colors.black54),
-                                      borderRadius: BorderRadius.circular(15))),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 25,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Belum punya akun?',
-                                style: blackTextStyle.copyWith(
-                                    color: blackColor, fontSize: 18),
-                              ),
-                              Center(
-                                child: InkWell(
-                                  onTap: () {
-                                    // Ketika text register ditekan
-                                    Navigator.pop(context);
-                                    _modalRegister();
-                                  },
+                              Container(
+                                height: 60,
+                                width: MediaQuery.of(context).size.width -
+                                    2 * defaultMargin,
+                                child: ElevatedButton(
+                                  onPressed: () {},
                                   child: Text(
-                                    'Registrasi',
+                                    'Login',
                                     style: blackTextStyle.copyWith(
-                                        color:
-                                            Color.fromARGB(255, 237, 124, 49),
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black),
                                   ),
+                                  style: ElevatedButton.styleFrom(
+                                      primary: primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                          side:
+                                              BorderSide(color: Colors.black54),
+                                          borderRadius:
+                                              BorderRadius.circular(15))),
                                 ),
+                              ),
+                              SizedBox(
+                                height: 25,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Belum punya akun?',
+                                    style: blackTextStyle.copyWith(
+                                        color: blackColor, fontSize: 18),
+                                  ),
+                                  Center(
+                                    child: InkWell(
+                                      onTap: () {
+                                        // Ketika text register ditekan
+                                        Navigator.pop(context);
+                                        _modalRegister();
+                                      },
+                                      child: Text(
+                                        'Registrasi',
+                                        style: blackTextStyle.copyWith(
+                                            color: Color.fromARGB(
+                                                255, 237, 124, 49),
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 25,
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: 25,
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                )
-              ],
-            );
+                    )
+                  ],
+                ));
           });
         });
   }
