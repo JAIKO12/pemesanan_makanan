@@ -1,3 +1,4 @@
+import 'package:aplikasi_pemesanan_makanan/home_screen/home.dart';
 import 'package:aplikasi_pemesanan_makanan/login_page/theme_shared.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +34,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 height: 333,
                 fit: BoxFit.fill,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Text(
@@ -48,7 +49,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 'Pesan makanan ga perlu antri lama ',
                 style: blackTextStyle.copyWith(fontSize: 20),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 51,
               ),
               Container(
@@ -325,17 +326,34 @@ class _WelcomePageState extends State<WelcomePage> {
                                             ),
                                             actions: <Widget>[
                                               TextButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                  _emailTextController.clear();
-                                                  _passwordTextController
-                                                      .clear();
-                                                  _namaTextController.clear();
-                                                  _confirmPwTextController
-                                                      .clear();
-                                                },
-                                                child: Text("Tutup"),
-                                              ),
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                    _emailTextController
+                                                        .clear();
+                                                    _passwordTextController
+                                                        .clear();
+                                                    _namaTextController.clear();
+                                                    _confirmPwTextController
+                                                        .clear();
+                                                  },
+                                                  child: Text(
+                                                    "Tutup",
+                                                    style:
+                                                        blackTextStyle.copyWith(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color:
+                                                                Colors.white),
+                                                  ),
+                                                  style: ElevatedButton.styleFrom(
+                                                      primary: Colors.orange,
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          15)))),
                                             ],
                                           );
                                         },
@@ -376,6 +394,10 @@ class _WelcomePageState extends State<WelcomePage> {
                                         // Ketika kata login ditekan
                                         Navigator.pop(context);
                                         _modalLogin();
+                                        _emailTextController.clear();
+                                        _passwordTextController.clear();
+                                        _namaTextController.clear();
+                                        _confirmPwTextController.clear();
                                       },
                                       child: Text(
                                         'Login',
@@ -459,6 +481,10 @@ class _WelcomePageState extends State<WelcomePage> {
                                       onTap: () {
                                         // Ketika icon close ditekan
                                         Navigator.pop(context);
+                                        _emailTextController.clear();
+                                        _passwordTextController.clear();
+                                        _namaTextController.clear();
+                                        _confirmPwTextController.clear();
                                       },
                                       child: Image.asset(
                                         'assets/images/close.png',
@@ -477,6 +503,13 @@ class _WelcomePageState extends State<WelcomePage> {
                               SizedBox(height: 20),
                               // field email
                               TextFormField(
+                                controller: _emailTextController,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Email harus diisi';
+                                  }
+                                  return null;
+                                },
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10),
@@ -493,6 +526,13 @@ class _WelcomePageState extends State<WelcomePage> {
                               SizedBox(height: 20),
                               // field password
                               TextFormField(
+                                controller: _passwordTextController,
+                                validator: (value) {
+                                  if (value!.length < 6) {
+                                    return 'Password harus diisi';
+                                  }
+                                  return null;
+                                },
                                 obscureText: _isHiddenPassword,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
@@ -522,7 +562,20 @@ class _WelcomePageState extends State<WelcomePage> {
                                 width: MediaQuery.of(context).size.width -
                                     2 * defaultMargin,
                                 child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    if (_formKey.currentState!.validate()) {
+                                      // Lakukan sesuatu jika formulir valid
+                                      Navigator.of(context)
+                                          .pop(); // Tutup modal login
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              HomePage(), //  Gantilah dengan nama kelas halaman utama Anda
+                                        ),
+                                      );
+                                    }
+                                  },
                                   child: Text(
                                     'Login',
                                     style: blackTextStyle.copyWith(
@@ -557,6 +610,10 @@ class _WelcomePageState extends State<WelcomePage> {
                                         // Ketika text register ditekan
                                         Navigator.pop(context);
                                         _modalRegister();
+                                        _emailTextController.clear();
+                                        _passwordTextController.clear();
+                                        _namaTextController.clear();
+                                        _confirmPwTextController.clear();
                                       },
                                       child: Text(
                                         'Registrasi',
