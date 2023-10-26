@@ -12,7 +12,6 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   final _formKey = GlobalKey<FormState>();
   bool _isHidden = true;
-  bool _isHiddenEmail = true;
   bool _isHiddenPassword = true;
   bool _isHiddenConfirmPw = true;
   final _namaTextController = TextEditingController();
@@ -42,7 +41,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 textAlign: TextAlign.center,
                 style: welcomeTextStyle,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Text(
@@ -68,12 +67,12 @@ class _WelcomePageState extends State<WelcomePage> {
                         color: Colors.white),
                   ),
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.orange,
+                      backgroundColor: Colors.orange,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15))),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Container(
@@ -91,27 +90,15 @@ class _WelcomePageState extends State<WelcomePage> {
                         color: Colors.black),
                   ),
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
+                      backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.black54),
+                          side: const BorderSide(color: Colors.black54),
                           borderRadius: BorderRadius.circular(15))),
                 ),
               )
             ]),
       ),
     );
-  }
-
-  void _tootleUsernameView() {
-    setState(() {
-      _isHidden = !_isHidden;
-    });
-  }
-
-  void _tootleEmailView() {
-    setState(() {
-      _isHiddenEmail = !_isHiddenEmail;
-    });
   }
 
   void _tootlePasswordView() {
@@ -143,7 +130,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       child: Container(
                         decoration: BoxDecoration(
                             color: modal,
-                            borderRadius: BorderRadius.only(
+                            borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(40),
                                 topLeft: Radius.circular(40))),
                         child: Container(
@@ -153,7 +140,7 @@ class _WelcomePageState extends State<WelcomePage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               // jarak
-                              SizedBox(
+                              const SizedBox(
                                 height: 25,
                               ),
                               Row(
@@ -176,7 +163,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                       ),
                                     ],
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   Center(
                                     child: InkWell(
                                       onTap: () {
@@ -196,7 +183,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 25,
                               ),
                               // field nama
@@ -221,7 +208,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                           : Icons.visibility_off_outlined),
                                     )),
                               ),
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                               // field email
                               TextFormField(
                                 controller: _emailTextController,
@@ -241,10 +228,10 @@ class _WelcomePageState extends State<WelcomePage> {
                                       onTap: () {
                                         // ketika ditekan
                                       },
-                                      child: Icon(Icons.visibility),
+                                      child: const Icon(Icons.visibility),
                                     )),
                               ),
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                               // field password
                               TextFormField(
                                 controller: _passwordTextController,
@@ -270,7 +257,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                           : Icons.lock_clock_outlined),
                                     )),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               // field confirm
@@ -301,7 +288,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                           : Icons.lock_clock_outlined),
                                     )),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 25,
                               ),
                               Container(
@@ -347,7 +334,8 @@ class _WelcomePageState extends State<WelcomePage> {
                                                                 Colors.white),
                                                   ),
                                                   style: ElevatedButton.styleFrom(
-                                                      primary: Colors.orange,
+                                                      backgroundColor:
+                                                          Colors.orange,
                                                       shape:
                                                           RoundedRectangleBorder(
                                                               borderRadius:
@@ -368,15 +356,15 @@ class _WelcomePageState extends State<WelcomePage> {
                                         color: Colors.black),
                                   ),
                                   style: ElevatedButton.styleFrom(
-                                      primary: primaryColor,
+                                      backgroundColor: primaryColor,
                                       shape: RoundedRectangleBorder(
-                                          side:
-                                              BorderSide(color: Colors.black54),
+                                          side: const BorderSide(
+                                              color: Colors.black54),
                                           borderRadius:
                                               BorderRadius.circular(15))),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 25,
                               ),
                               Row(
@@ -402,7 +390,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                       child: Text(
                                         'Login',
                                         style: blackTextStyle.copyWith(
-                                            color: Color.fromARGB(
+                                            color: const Color.fromARGB(
                                                 255, 237, 124, 49),
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold),
@@ -411,7 +399,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 25,
                               ),
                             ],
@@ -442,7 +430,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       child: Container(
                         decoration: BoxDecoration(
                             color: modal,
-                            borderRadius: BorderRadius.only(
+                            borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(40),
                                 topLeft: Radius.circular(40))),
                         child: Container(
@@ -452,7 +440,7 @@ class _WelcomePageState extends State<WelcomePage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               // jarak
-                              SizedBox(
+                              const SizedBox(
                                 height: 25,
                               ),
                               Row(
@@ -475,7 +463,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                       ),
                                     ],
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   Center(
                                     child: InkWell(
                                       onTap: () {
@@ -495,12 +483,12 @@ class _WelcomePageState extends State<WelcomePage> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 25,
                               ),
                               // field nama
 
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                               // field email
                               TextFormField(
                                 controller: _emailTextController,
@@ -520,10 +508,10 @@ class _WelcomePageState extends State<WelcomePage> {
                                       onTap: () {
                                         // ketika ditekan
                                       },
-                                      child: Icon(Icons.visibility),
+                                      child: const Icon(Icons.visibility),
                                     )),
                               ),
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                               // field password
                               TextFormField(
                                 controller: _passwordTextController,
@@ -549,12 +537,12 @@ class _WelcomePageState extends State<WelcomePage> {
                                           : Icons.lock_clock_outlined),
                                     )),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               // field confirm
 
-                              SizedBox(
+                              const SizedBox(
                                 height: 25,
                               ),
                               Container(
@@ -576,6 +564,13 @@ class _WelcomePageState extends State<WelcomePage> {
                                       );
                                     }
                                   },
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                          side: const BorderSide(
+                                              color: Colors.black54),
+                                          borderRadius:
+                                              BorderRadius.circular(15))),
                                   child: Text(
                                     'Login',
                                     style: blackTextStyle.copyWith(
@@ -583,16 +578,9 @@ class _WelcomePageState extends State<WelcomePage> {
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black),
                                   ),
-                                  style: ElevatedButton.styleFrom(
-                                      primary: primaryColor,
-                                      shape: RoundedRectangleBorder(
-                                          side:
-                                              BorderSide(color: Colors.black54),
-                                          borderRadius:
-                                              BorderRadius.circular(15))),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 25,
                               ),
                               Row(
@@ -618,7 +606,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                       child: Text(
                                         'Registrasi',
                                         style: blackTextStyle.copyWith(
-                                            color: Color.fromARGB(
+                                            color: const Color.fromARGB(
                                                 255, 237, 124, 49),
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold),
@@ -627,7 +615,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 25,
                               ),
                             ],

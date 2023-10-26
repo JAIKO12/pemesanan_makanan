@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.cyan,
           primaryColor: secondaryColor,
           canvasColor: Colors.transparent),
-      home: WelcomePage(),
+      home: const WelcomePage(),
     );
   }
 }
