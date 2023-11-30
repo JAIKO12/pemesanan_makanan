@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "244255137818",
+    "project_id": "login-app-pemesanan-makanan",
+    "storage_bucket": "login-app-pemesanan-makanan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244255137818:android:6f6d1110438c1543ec31a3",
+        "android_client_info": {
+          "package_name": "com.example.aplikasi_pemesanan_makanan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM8bMNGn5j790KXUGXlLd9sxr6_Zl2Kqo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
